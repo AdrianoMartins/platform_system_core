@@ -125,6 +125,10 @@ ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
 BOARD_HAL_STATIC_LIBRARIES ?= libhealthd.qcom
 endif
 
+ifeq ($(strip $(BOARD_NO_CHARGER_LED)),true)
+LOCAL_CFLAGS += -DNO_CHARGER_LED
+endif
+
 # Symlink /charger to /sbin/healthd
 LOCAL_POST_INSTALL_CMD := $(hide) mkdir -p $(TARGET_ROOT_OUT) \
     && rm -f $(TARGET_ROOT_OUT)/charger && ln -sf /sbin/healthd $(TARGET_ROOT_OUT)/charger
